@@ -1,3 +1,17 @@
 <template>
-    <div>TODOS</div>
+    <template if:true={todosResult.loading}>
+        <div>Loading...</div>
+    </template>
+    <template if:false={todosResult.loading}>
+        <template if:true={todosResult.error}>
+            <div>Error</div>
+        </template>
+        <template if:false={todosResult.error}>
+            <template for:each={todosResult.data.allTodos.nodes} for:item="todo">
+                <div key={todo.nodeId}>
+                    {todo.title}
+                </div>
+            </template>
+        </template>
+    </template>
 </template>
