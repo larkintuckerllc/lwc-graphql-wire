@@ -1,3 +1,3 @@
 import { LightningElement } from 'lwc';
 
-export default class Greeting extends LightningElement {}
+export default class Todos extends LightningElement {}

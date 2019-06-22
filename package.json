@@ -5,6 +5,7 @@
     "author": "John Tucker",
     "bugs": "https://github.com/larkintuckerllc/lwc-graphql-wire/issues",
     "dependencies": {
+        "@lwc/wire-service": "^1.0.0",
         "lwc-services": "^1.2.2"
     },
     "devDependencies": {
