@@ -7,11 +7,18 @@ export default class App extends LightningElement {
     @track
     visibleTwo = false;
 
+    @track
+    visibleTodos = false;
+
     handleClick = () => {
         this.visible = !this.visible;
     };
 
     handleTwoClick = () => {
         this.visibleTwo = !this.visibleTwo;
+    };
+
+    handleTodosClick = () => {
+        this.visibleTodos = !this.visibleTodos;
     };
 }

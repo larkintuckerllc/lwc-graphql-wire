@@ -22,7 +22,6 @@
             <a href="https://lwc.dev" class="link" target="_blank">Learn LWC</a>
         </div>
     </div>
-    <my-todos></my-todos>
     <div>
         <button onclick={handleClick}>Toggle</button>
     </div>
@@ -34,5 +33,11 @@
     </div>
     <template if:true={visibleTwo}>
         <my-hello-world-two></my-hello-world-two>
+    </template>
+    <div>
+        <button onclick={handleTodosClick}>Toggle Todos</button>
+    </div>
+    <template if:true={visibleTodos}>
+        <my-todos></my-todos>
     </template>
 </template>
