@@ -38,6 +38,7 @@
         <button onclick={handleTodosClick}>Toggle Todos</button>
     </div>
     <template if:true={visibleTodos}>
+        <my-todos-create></my-todos-create>
         <my-todos></my-todos>
     </template>
 </template>
