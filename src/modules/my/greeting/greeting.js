@@ -58,7 +58,7 @@ export default class Greeting extends LightningElement {
     handleAnimationEnd() {
         this.isAnimating = false;
         this.index = (this.index + 1) % greetings.length;
-
+        // eslint-disable-next-line
         setTimeout(() => this.updateGreeting(), 500);
     }
 
