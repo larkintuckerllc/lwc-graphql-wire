@@ -1,6 +1,7 @@
 import { gql } from 'apollo-boost';
-import { LightningElement, track } from 'lwc';
+import { LightningElement, track, wire } from 'lwc';
 import client from 'my/client';
+import mutationWire from 'my/mutationWire';
 import { ALL_TODOS_QUERY } from 'my/todos';
 
 const CREATE_TODO_MUTATION = gql`
@@ -34,12 +35,21 @@ const handleMutationUpdate = (cache, { data }) => {
 };
 
 export default class TodosCreate extends LightningElement {
-    @track error = false;
-    @track loading = false;
-    @track title = '';
-    @track valid = false;
+    lastError = null;
+    lastLoading = null;
+    @track
+    title = '';
+    @wire(mutationWire, {
+        client,
+        mutation: CREATE_TODO_MUTATION,
+        update: handleMutationUpdate
+    })
+    todosCreateResult;
+    @track
+    valid = false;
+
     get invalidOrLoading() {
-        return !this.valid || this.loading;
+        return !this.valid || this.todosCreateResult.loading;
     }
 
     handleInput = event => {
@@ -48,24 +58,24 @@ export default class TodosCreate extends LightningElement {
         this.valid = trimmedTitle !== '';
     };
 
-    handleSubmit = async event => {
+    handleSubmit = event => {
         event.preventDefault();
-        const mutationOptions = {
-            mutation: CREATE_TODO_MUTATION,
-            update: handleMutationUpdate,
-            variables: {
-                title: this.title
-            }
+        const variables = {
+            title: this.title
         };
-        this.error = false;
-        this.loading = true;
-        try {
-            await client.mutate(mutationOptions);
+        this.todosCreateResult.mutate(variables);
+    };
+
+    renderedCallback() {
+        if (
+            this.lastLoading &&
+            !this.todosCreateResult.loading &&
+            !this.todosCreateResult.error
+        ) {
             this.title = '';
             this.valid = false;
-        } catch (err) {
-            this.error = true;
         }
-        this.loading = false;
-    };
+        this.lastError = this.todosCreateResult.error;
+        this.lastLoading = this.todosCreateResult.loading;
+    }
 }

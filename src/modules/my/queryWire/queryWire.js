@@ -14,9 +14,9 @@ register(queryWire, eventTarget => {
     const sendResult = () => {
         if (!connected) return;
         const result = {
+            data,
             error,
-            loading,
-            data
+            loading
         };
         const event = new ValueChangedEvent(result);
         eventTarget.dispatchEvent(event);
@@ -40,19 +40,13 @@ register(queryWire, eventTarget => {
     };
 
     const handleConfig = config => {
+        connected = true;
         client = config.client;
         query = config.query;
-        const result = {
-            error,
-            loading,
-            data
-        };
-        const event = new ValueChangedEvent(result);
-        eventTarget.dispatchEvent(event);
+        sendResult();
     };
 
     const handleConnect = async () => {
-        connected = true;
         const queryOptions = {
             query
         };
