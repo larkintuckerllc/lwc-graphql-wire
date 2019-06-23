@@ -9,7 +9,10 @@
             />
         </div>
         <template if:true={todosCreateResult.data}>
-            <div>Successfully created {todosCreateResult.data.createTodo.todo.title}</div>
+            <div>
+                Successfully created
+                {todosCreateResult.data.createTodo.todo.title}
+            </div>
         </template>
         <template if:true={todosCreateResult.error}>
             <div>Error</div>
