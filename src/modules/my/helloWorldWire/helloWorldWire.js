@@ -17,6 +17,7 @@ register(helloWorldWire, eventTarget => {
     console.log('HELLO WORLD WIRE REGISTER');
 
     const handleConfig = config => {
+        console.log('HELLO WORLD WIRE CONFIG');
         world = config.world;
     };
 
