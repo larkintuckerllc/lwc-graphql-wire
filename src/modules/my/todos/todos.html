@@ -7,10 +7,7 @@
             <div>Error</div>
         </template>
         <template if:false={error}>
-            <template
-                for:each={todos}
-                for:item="todo"
-            >
+            <template for:each={todos} for:item="todo">
                 <div key={todo.nodeId}>
                     {todo.title}
                 </div>
