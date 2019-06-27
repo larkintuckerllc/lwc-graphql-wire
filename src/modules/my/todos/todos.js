@@ -18,4 +18,16 @@ export const ALL_TODOS_QUERY = gql`
 export default class Todos extends LightningElement {
     @wire(queryWire, { client, query: ALL_TODOS_QUERY })
     todosResult;
+
+    get error() {
+        return this.todosResult.error;
+    }
+
+    get loading() {
+        return this.todosResult.loading;
+    }
+
+    get todos() {
+        return this.todosResult.data.allTodos.nodes;
+    }
 }

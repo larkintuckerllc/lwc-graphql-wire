@@ -48,8 +48,24 @@ export default class TodosCreate extends LightningElement {
     @track
     valid = false;
 
+    get error() {
+        return this.todosCreateResult.error;
+    }
+
     get invalidOrLoading() {
         return !this.valid || this.todosCreateResult.loading;
+    }
+
+    get loading() {
+        return this.todosCreateResult.loading;
+    }
+
+    get success() {
+        return this.todosCreateResult.data !== null;
+    }
+
+    get todo() {
+        return this.todosCreateResult.data.createTodo.todo;
     }
 
     handleInput = event => {

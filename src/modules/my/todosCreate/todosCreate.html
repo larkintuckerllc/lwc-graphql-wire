@@ -2,19 +2,18 @@
     <form onsubmit={handleSubmit}>
         <div>
             <input
-                disabled={todosCreateResult.loading}
+                disabled={loading}
                 oninput={handleInput}
                 type="text"
                 value={title}
             />
         </div>
-        <template if:true={todosCreateResult.data}>
+        <template if:true={success}>
             <div>
-                Successfully created
-                {todosCreateResult.data.createTodo.todo.title}
+                Successfully created {todo.title}
             </div>
         </template>
-        <template if:true={todosCreateResult.error}>
+        <template if:true={error}>
             <div>Error</div>
         </template>
         <div>
